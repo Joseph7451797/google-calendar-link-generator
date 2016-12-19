@@ -17,11 +17,11 @@
 <div class="container" ng-controller="EventController">
     <div class="row">
         <div class="col-md-5 col-lg-4">
-            <h1>Event URL generator</h1>
-            <h2>"add to Google Calendar"</h2>
+            <h1>Google 日曆 URL 生成器</h1>
+            <h2>生成一個可以自動生成 google 日曆活動資訊的連結</h2>
         </div>
         <div class="col-md-5 col-lg-4" ng-show="url">
-            <h3>Event URL</h3>
+            <h3>生成的活動 URL</h3>
             <div>
 				<textarea class="form-control">{{url}}</textarea>
             </div>
@@ -31,22 +31,22 @@
     <div class="row">
         <div class="col-md-5 col-lg-4">
             <form novalidate ng-submit="getUrl()">
-                <h3>Event Info</h3>
+                <h3>活動資訊</h3>
                 <div class="form-group">
-                    <label for="eventTitle">Title:</label>
+                    <label for="eventTitle">活動名稱:</label>
                     <input ng-model="title" type="text" id="eventTitle" name="title" class="form-control" required />
                 </div>
                 <div class="form-group">
-                    <label for="eventDesc">Description:</label>
+                    <label for="eventDesc">活動描述（活動資訊中的「說明」欄位）:</label>
                     <textarea ng-model="desc" id="eventDesc" name="desc" class="form-control" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="eventDesc">Location:</label>
+                    <label for="eventDesc">地點:</label>
                     <textarea ng-model="locat" id="eventLocat" name="locat" class="form-control" required></textarea>
                 </div>
-                <h3>Date and Time</h3>
+                <h3>日期與時間</h3>
                 <div class="form-group">
-                    <label for="eventDateStart">Start:</label>
+                    <label for="eventDateStart">開始時間:</label>
                     <div class="input-group date" id="dateStartContainer" datetime ng-model="start">
                         <input type="text" class="form-control" id="eventDateStart" name="start" readonly/>
                         <span class="input-group-addon">
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="eventDateEnd">End:</label>
+                    <label for="eventDateEnd">結束時間:</label>
                     <div class="input-group date" id="dateEndContainer" datetime ng-model="end">
                         <input type="text" class="form-control" id="eventDateEnd" name="end" readonly/>
                         <span class="input-group-addon">
