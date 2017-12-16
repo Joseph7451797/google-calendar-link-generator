@@ -1,7 +1,7 @@
 ;(function(){
     'use strict';
 
-    var app = angular.module('calendar', ['ngAnimate']);
+    var app = angular.module('calendar', ['ngclipboard', 'ngAnimate']);
 
     app.controller('EventController', function($scope){
         var getUrl = function(title, desc, locat, start, end){
@@ -22,6 +22,22 @@
             $scope.copied = false;
             $scope.url    = getUrl($scope.title, $scope.desc, $scope.locat, $scope.start, $scope.end);
         };
+
+        // You can still access the clipboard.js event
+        $scope.onSuccess = function(e) {
+            console.info('Action:', e.action);
+            console.info('Text:', e.text);
+            console.info('Trigger:', e.trigger);
+
+            e.clearSelection();
+            alert('複製成功！');
+        };
+
+        $scope.onError = function(e) {
+            console.error('Action:', e.action);
+            console.error('Trigger:', e.trigger);
+            alert('複製失敗！請手動選取再複製')
+        }
     });
 
     app.directive('datetime', function($parse){
@@ -53,24 +69,24 @@
         };
     });
 
-    app.directive('copyOnClick', function(){
-        var link = function(scope, element, attrs){
-            var client = new ZeroClipboard(element);
+    // app.directive('copyOnClick', function(){
+    //     var link = function(scope, element, attrs){
+    //         var client = new ZeroClipboard(element);
 
-            client.on('ready', function(event){
-                client.on('copy', function(event) {
-                    event.clipboardData.setData('text/plain', scope.url);
+    //         client.on('ready', function(event){
+    //             client.on('copy', function(event) {
+    //                 event.clipboardData.setData('text/plain', scope.url);
 
-                    scope.$apply(function(scope){
-                        scope.copied = true;
-                    });
-                });
-            });
-        };
+    //                 scope.$apply(function(scope){
+    //                     scope.copied = true;
+    //                 });
+    //             });
+    //         });
+    //     };
 
-        return {
-            restrict: 'A',
-            link: link
-        };
-    });
+    //     return {
+    //         restrict: 'A',
+    //         link: link
+    //     };
+    // });
 })();
